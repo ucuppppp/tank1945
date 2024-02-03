@@ -59,7 +59,7 @@ const blockList = [
   // dan seterusnya
 ];
 
-const tank = new Tank(canvas, '/assets/img/player1_tank.png', 6, blockList);
+const tank = new Tank(canvas, '/assets/img/player1.png', 6, blockList);
 
 function game() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
