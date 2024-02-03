@@ -5,23 +5,39 @@ export default class Tank {
   moveLeft = false;
   moveRight = false;
 
-  constructor(canvas, imageSrc, speed) {
+  constructor(canvas, imageSrc, speed, blockList) {
     this.canvas = canvas;
     this.image = new Image();
     this.image.src = imageSrc;
-    this.x = 50;
-    this.y = 50;
+    this.x = -10
+    this.y = -10
     this.width = 100;
     this.height = 100;
     this.speed = speed;
-    this.angle = 0;
+    this.angle = 180;
+    this.blockList = blockList
 
     document.addEventListener("keydown", this.keydown.bind(this));
     document.addEventListener("keyup", this.keyup.bind(this));
   }
 
   draw(ctx) {
+
     this.move();
+    
+    // mengecheck koordinat agar objek tidak keluar dari canvas
+    if(this.x <= -10){
+      this.x = -10
+    } else if(this.x >= this.canvas.width - 90){
+      this.x = this.canvas.width - 90
+    }
+    
+    if(this.y <= -10){
+      this.y = -10
+    } else if(this.y >= this.canvas.height - 90){
+      this.y = this.canvas.height - 90
+    }
+
 
     // Simpan transformasi saat ini
     ctx.save();
@@ -43,47 +59,75 @@ export default class Tank {
   }
 
   move() {
+
+    let nextX = this.x
+    let nextY = this.y
+
     if (this.moveUp) {
-      this.y -= this.speed;
+      nextY -= this.speed;
       this.angle = 0; // Mengatur sudut rotasi ke atas
     } else if (this.moveDown) {
-      this.y += this.speed;
+      nextY += this.speed;
       this.angle = 180; // Mengatur sudut rotasi ke bawah
     } else if (this.moveLeft) {
-      this.x -= this.speed;
+      nextX -= this.speed;
       this.angle = -90; // Mengatur sudut rotasi ke kiri
     } else if (this.moveRight) {
-      this.x += this.speed;
+      nextX += this.speed;
       this.angle = 90; // Mengatur sudut rotasi ke kanan
     }
+
+    if(!this.checkCollision(nextX, nextY)){
+      this.x = nextX
+      this.y = nextY
+    }
+
   }
 
+  checkCollision(nextX, nextY){
+    for(const block of this.blockList){
+      if(
+      nextX < block.x + block.width - 15 &&
+      nextX + this.width > block.x + 15 &&
+      nextY < block.y + block.height - 15 &&
+      nextY + this.height > block.y + 15
+      ){
+        return true
+      }
+    }
+    return false
+  }
+
+
+
   keydown(e) {
-    if (e.code === "ArrowRight" || e.code === 'd') {
+    console.log("X :", this.x)
+    console.log("Y :", this.y)
+    if (e.code === "ArrowRight" || e.code === 'KeyD') {
       this.moveRight = true;
     }
-    if (e.code === "ArrowLeft" || e.code === 'a') {
+    if (e.code === "ArrowLeft" || e.code === 'KeyA') {
       this.moveLeft = true;
     }
-    if (e.code === "ArrowUp" || e.code === 'w') {
+    if (e.code === "ArrowUp" || e.code === 'KeyW') {
       this.moveUp = true;
     }
-    if (e.code === "ArrowDown" || e.code === 's') {
+    if (e.code === "ArrowDown" || e.code === 'KeyS') {
       this.moveDown = true;
     }
   }
 
   keyup(e) {
-    if (e.code === "ArrowRight" || e.code === 'd') {
+    if (e.code === "ArrowRight" || e.code === 'KeyD') {
       this.moveRight = false;
     }
-    if (e.code === "ArrowLeft" || e.code === 'a') {
+    if (e.code === "ArrowLeft" || e.code === 'KeyA') {
       this.moveLeft = false;
     }
-    if (e.code === "ArrowUp" || e.code === 'w') {
+    if (e.code === "ArrowUp" || e.code === 'KeyW') {
       this.moveUp = false;
     }
-    if (e.code === "ArrowDown" || e.code === 's') {
+    if (e.code === "ArrowDown" || e.code === 'KeyS') {
       this.moveDown = false;
     }
   }
