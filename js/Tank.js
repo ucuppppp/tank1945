@@ -4,8 +4,12 @@ export default class Tank {
   moveDown = false;
   moveLeft = false;
   moveRight = false;
+  shoot = false;
+  bulletDirection = "down"
+  limit = false
+  bulletLimit = 10
 
-  constructor(canvas, imageSrc, speed, blockList) {
+  constructor(canvas, imageSrc, speed, blockList, bulletController) {
     this.canvas = canvas;
     this.image = new Image();
     this.image.src = imageSrc;
@@ -16,6 +20,7 @@ export default class Tank {
     this.speed = speed;
     this.angle = 180;
     this.blockList = blockList
+    this.bulletController = bulletController
 
     document.addEventListener("keydown", this.keydown.bind(this));
     document.addEventListener("keyup", this.keyup.bind(this));
@@ -60,21 +65,41 @@ export default class Tank {
 
   move() {
 
+    if(this.shoot){
+      if(this.bulletDirection == "down"){
+        this.bulletController.shoot(this.x + this.width / 2 - 5 , this.y +  this.height - 8, 10, this.bulletDirection, 1)
+      } if(this.bulletDirection == "up"){ 
+        this.bulletController.shoot(this.x + this.width / 2 - 4 , this.y, 10, this.bulletDirection, 1)
+      } if(this.bulletDirection == "right"){
+        this.bulletController.shoot(this.x + this.width - 8, this.y + this.height / 2 - 4 , 10, this.bulletDirection, 1)
+      } if(this.bulletDirection == "left"){
+        this.bulletController.shoot(this.x - 3, this.y + this.height / 2 - 6, 10, this.bulletDirection, 1)
+      }
+
+      this.shoot = false
+      this.limit = true
+
+    }
+
     let nextX = this.x
     let nextY = this.y
 
     if (this.moveUp) {
       nextY -= this.speed;
       this.angle = 0; // Mengatur sudut rotasi ke atas
+      this.bulletDirection = "up";
     } else if (this.moveDown) {
       nextY += this.speed;
       this.angle = 180; // Mengatur sudut rotasi ke bawah
+      this.bulletDirection = "down"
     } else if (this.moveLeft) {
       nextX -= this.speed;
       this.angle = -90; // Mengatur sudut rotasi ke kiri
+      this.bulletDirection = "left"; 
     } else if (this.moveRight) {
       nextX += this.speed;
       this.angle = 90; // Mengatur sudut rotasi ke kanan
+      this.bulletDirection = "right";
     }
 
     if(!this.checkCollision(nextX, nextY)){
@@ -98,11 +123,12 @@ export default class Tank {
     return false
   }
 
-
+  
 
   keydown(e) {
-    console.log("X :", this.x)
-    console.log("Y :", this.y)
+    if(e.code === "Space" && !this.limit){
+      this.shoot = true;
+    }
     if (e.code === "ArrowRight" || e.code === 'KeyD') {
       this.moveRight = true;
     }
@@ -118,6 +144,10 @@ export default class Tank {
   }
 
   keyup(e) {
+    if (e.code === "Space") {
+      this.shoot = false;
+      this.limit = false
+    }
     if (e.code === "ArrowRight" || e.code === 'KeyD') {
       this.moveRight = false;
     }
