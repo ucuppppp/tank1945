@@ -65,6 +65,10 @@ export default class Tank {
 
   move() {
 
+    let element = [1,2,3]
+
+    // console.log()
+
     if(this.shoot){
       if(this.bulletDirection == "down"){
         this.bulletController.shoot(this.x + this.width / 2 - 5 , this.y +  this.height - 8, 10, this.bulletDirection, 1)

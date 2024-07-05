@@ -1,4 +1,4 @@
-import Bullet from "./Bullet.js"
+import Bullet from "./Bullet.js";
 
 export default class BulletController {
   bullets = [];
@@ -9,30 +9,32 @@ export default class BulletController {
     this.maxBulletAtATime = maxBulletAtATime;
     this.bulletColor = bulletColor;
     this.soundEnabled = soundEnabled;
-    this.shootSound = new Audio("assets/sounds/shoot.wav")
-    this.shootSound.volume = 0.5
+    this.shootSound = new Audio("assets/sounds/shoot.wav");
+    this.shootSound.volume = 0.5;
   }
 
-  // update() {
-  //   if (this.timeTillNextBulletAllowed > 0) {
-  //     this.timeTillNextBulletAllowed--;
-  //   }
-  // }
-
-  draw(ctx) {
-    this.bullets.forEach((bullet) => bullet.draw(ctx));
+  draw(ctx, blockList) {
+    this.bullets = this.bullets.filter((bullet) => !bullet.destroyed);
+    this.bullets.forEach((bullet) => bullet.draw(ctx, blockList));
   }
 
   shoot(x, y, speed, direction, timeTillNextBulletAllowed = 0) {
-    // if (this.timeTillNextBulletAllowed <= 0 && this.bullets.length < this.maxBulletAtATime) {
-      const bullet = new Bullet(this.canvas, x, y, this.bulletColor, speed, direction);
+    console.log(this.bullets.length);
+    if (this.bullets.length < this.maxBulletAtATime) {
+      const bullet = new Bullet(
+        this.canvas,
+        x,
+        y,
+        this.bulletColor,
+        speed,
+        direction
+      );
       this.bullets.push(bullet);
-       if(this.soundEnabled){
-        this.soundEnabled = true
-        this.shootSound.currentTime = 0
-        this.shootSound.play()
-       }
-    // }
+      if (this.soundEnabled) {
+        this.shootSound.currentTime = 0;
+        this.shootSound.play();
+      }
+    }
     this.timeTillNextBulletAllowed = timeTillNextBulletAllowed;
   }
 }
