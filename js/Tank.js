@@ -13,10 +13,10 @@ export default class Tank {
     this.canvas = canvas;
     this.image = new Image();
     this.image.src = imageSrc;
-    this.x = -10
-    this.y = -10
-    this.width = 100;
-    this.height = 100;
+    this.x = 0
+    this.y = 0
+    this.width = 70;
+    this.height = 80;
     this.speed = speed;
     this.angle = 180;
     this.blockList = blockList
@@ -31,16 +31,16 @@ export default class Tank {
     this.move();
     
     // mengecheck koordinat agar objek tidak keluar dari canvas
-    if(this.x <= -10){
-      this.x = -10
-    } else if(this.x >= this.canvas.width - 90){
-      this.x = this.canvas.width - 90
+    if(this.x <= 0){
+      this.x = 0
+    } else if(this.x >= this.canvas.width - 80){
+      this.x = this.canvas.width - 80
     }
     
-    if(this.y <= -10){
-      this.y = -10
-    } else if(this.y >= this.canvas.height - 90){
-      this.y = this.canvas.height - 90
+    if(this.y <= 0){
+      this.y = 0
+    } else if(this.y >= this.canvas.height - 80){
+      this.y = this.canvas.height - 80
     }
 
 

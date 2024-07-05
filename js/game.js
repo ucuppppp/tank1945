@@ -9,6 +9,10 @@ const ctx = canvas.getContext("2d");
 canvas.width = 960;
 canvas.height = 720;
 const blockWidth = 80;
+const enemyWidthAndHeight = 100;
+const playerWidthAndHeight = 100;
+
+
 
 const blockList = [
   new Block(
@@ -336,15 +340,15 @@ const blockList = [
 const playerbulletController = new BulletController(canvas, 1, "yellow", false);
 const player = new Tank(
   canvas,
-  "./assets/img/player1.png",
+  "./assets/img/player1Adjust.png",
   4,
   blockList,
   playerbulletController
 );
 
- const enemy1 = new Enemy(canvas, 875, 625, "./assets/img/enemy.png", 3, "up");
- const enemy2 = new Enemy(canvas, 880, 0, "./assets/img/enemy.png", 3, "down");
- const enemy3 = new Enemy(canvas, -15, 625, "./assets/img/enemy.png", 3, "right");
+ const enemy1 = new Enemy(canvas, 875, 625, "./assets/img/enemyAdjust.png", 3, "up", 100, blockList);
+ const enemy2 = new Enemy(canvas, 880, 0, "./assets/img/enemyAdjust.png", 3, "down", 100 , blockList);
+ const enemy3 = new Enemy(canvas, -15, 625, "./assets/img/enemyAdjust.png", 3, "right", 100 , blockList);
 
 function game() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -360,6 +364,10 @@ function game() {
   enemy1.draw(ctx);
   enemy2.draw(ctx);
   enemy3.draw(ctx);
+  console.log("enemy1", "x :" + enemy1.x, "y :" + enemy1.y, "isCollided :" + enemy1.hasCollided, "cooldown :" + enemy1.cooldown);
+  console.log("enemy2","x :" + enemy2.x, "y :" + enemy2.y, "isCollided :" + enemy2.hasCollided, "cooldown :" + enemy2.cooldown);
+  console.log("enemy3","x :" + enemy3.x, "y :" + enemy3.y, "isCollided :" + enemy3.hasCollided, "cooldown :" + enemy3.cooldown);
+  
 
 }
 

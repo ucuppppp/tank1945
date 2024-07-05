@@ -1,18 +1,32 @@
 export default class Enemy {
-  constructor(canvas, x, y, imageSrc, speed, direction) {
+  constructor(
+    canvas,
+    x,
+    y,
+    imageSrc,
+    speed,
+    direction,
+    cooldownMax,
+    blockList
+  ) {
     this.canvas = canvas;
     this.x = x;
     this.y = y;
-    this.width = 100;
-    this.height = 100;
+    this.width = 70;
+    this.height = 90;
     this.image = new Image();
     this.image.src = imageSrc;
     this.direction = direction;
     this.speed = speed;
+    this.hasCollided = false;
+    this.cooldown = 0;
+    this.cooldownMax = cooldownMax;
+    this.blockList = blockList;
   }
 
   draw(ctx) {
     this.move();
+    this.updateCooldown();
 
     ctx.save();
 
@@ -34,53 +48,85 @@ export default class Enemy {
 
   move() {
     if (this.direction === "up") {
-      this.angle = 0; // Mengatur sudut rotasi ke atas
+      this.angle = 0; // Sudut rotasi ke atas
       this.y -= this.speed;
-      this.checkCollision();
-      this.bulletDirection = "up";
     } else if (this.direction === "down") {
-      this.angle = 180; // Mengatur sudut rotasi ke bawah
+      this.angle = 180; // Sudut rotasi ke bawah
       this.y += this.speed;
-      this.checkCollision();
-      this.bulletDirection = "down";
     } else if (this.direction === "left") {
-      this.angle = -90; // Mengatur sudut rotasi ke kiri
+      this.angle = -90; // Sudut rotasi ke kiri
       this.x -= this.speed;
-      this.checkCollision();
-      this.bulletDirection = "left";
-    } else if ((this.direction = "right")) {
-      this.angle = 90; // Mengatur sudut rotasi ke kanan
+    } else if (this.direction === "right") {
+      this.angle = 90; // Sudut rotasi ke kanan
       this.x += this.speed;
-      this.checkCollision();
-      this.bulletDirection = "right";
     }
+    this.checkCollision();
   }
 
   changeDirection() {
-    const randomDirections = ["up", "down", "left", "right"];
-    let newDirection = this.direction;
-    while (newDirection === this.direction) {
-      newDirection =
-        randomDirections[Math.floor(Math.random() * randomDirections.length)];
+    if (this.cooldown === 0) {
+      const randomDirections = ["up", "down", "left", "right"];
+      let newDirection = this.direction;
+      while (newDirection === this.direction) {
+        newDirection =
+          randomDirections[Math.floor(Math.random() * randomDirections.length)];
+      }
+      this.direction = newDirection;
+      this.hasCollided = false; // Reset hasCollided setelah mengganti arah
+      this.cooldown = this.cooldownMax;
     }
-    this.direction = newDirection;
   }
 
   checkCollision() {
-    if (this.x <= -10) {
-      this.x = -10;
+    // Pengecekan tabrakan dengan blok
+    this.blockList.forEach((block) => {
+      if (
+        this.x < block.x + block.width &&
+        this.x + this.width > block.x &&
+        this.y < block.y + block.height &&
+        this.y + this.height > block.y
+      ) {
+        // Setelah tabrakan, kembalikan posisi Enemy ke sebelum tabrakan
+        if (this.direction === "up") {
+          this.y = block.y + block.height - 5;
+        } else if (this.direction === "down") {
+          this.y = block.y - this.height - 5;
+        } else if (this.direction === "left") {
+          this.x = block.x + block.width ;
+        } else if (this.direction === "right") {
+          this.x = block.x - this.width;
+        }
+
+        this.changeDirection();
+        this.hasCollided = true; // Set hasCollided setelah tabrakan
+      }
+    });
+
+    // Pengecekan tabrakan dengan batas canvas
+    if (this.x <= 5) {
+      this.x = 5;
       this.changeDirection();
-    } else if (this.x >= this.canvas.width - 90) {
-      this.x = this.canvas.width - 85;
+      this.hasCollided = true; // Set hasCollided setelah tabrakan
+    } else if (this.x >= this.canvas.width - this.width - 5) {
+      this.x = this.canvas.width - this.width - 5;
       this.changeDirection();
+      this.hasCollided = true; // Set hasCollided setelah tabrakan
     }
 
-    if (this.y <= -10) {
-      this.y = -10;
+    if (this.y <= -5) {
+      this.y = -5;
       this.changeDirection();
-    } else if (this.y >= this.canvas.height - 90) {
-      this.y = this.canvas.height - 70;
+      this.hasCollided = true; // Set hasCollided setelah tabrakan
+    } else if (this.y >= this.canvas.height - this.height + 5) {
+      this.y = this.canvas.height - this.height + 5;
       this.changeDirection();
+      this.hasCollided = true; // Set hasCollided setelah tabrakan
+    }
+  }
+
+  updateCooldown() {
+    if (this.cooldown > 0) {
+      this.cooldown--;
     }
   }
 }
