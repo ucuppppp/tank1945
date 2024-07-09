@@ -11,9 +11,9 @@ export default class Bullet {
     this.destroyed = false; // Menandai apakah peluru telah hancur
   }
 
-  draw(ctx, blockList) {
+  draw(ctx, blockList, enemies) {
     this.move();
-    this.checkCollision(blockList);
+    this.checkCollision(blockList, enemies);
     if (!this.destroyed) {
       ctx.fillStyle = this.color;
       ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -38,7 +38,7 @@ export default class Bullet {
     this.checkOutOfBounds();
   }
 
-  checkCollision(blockList) {
+  checkCollision(blockList, enemies) {
     for (let i = 0; i < blockList.length; i++) {
       const block = blockList[i];
       if (
@@ -48,6 +48,20 @@ export default class Bullet {
         this.y + this.height > block.y
       ) {
         blockList.splice(i, 1);
+        this.destroyed = true;
+        break;
+      }
+    }
+
+    for (let i = 0; i < enemies.length; i++) {
+      const enemy = enemies[i];
+      if (
+        this.x < enemy.x + enemy.width &&
+        this.x + this.width > enemy.x &&
+        this.y < enemy.y + enemy.height &&
+        this.y + this.height > enemy.y
+      ) {
+        enemies.splice(i, 1);
         this.destroyed = true;
         break;
       }

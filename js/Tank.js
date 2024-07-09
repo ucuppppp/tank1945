@@ -9,7 +9,7 @@ export default class Tank {
   limit = false
   bulletLimit = 10
 
-  constructor(canvas, imageSrc, speed, blockList, bulletController) {
+  constructor(canvas, imageSrc, speed, blockList,bulletController) {
     this.canvas = canvas;
     this.image = new Image();
     this.image.src = imageSrc;
@@ -33,8 +33,8 @@ export default class Tank {
     // mengecheck koordinat agar objek tidak keluar dari canvas
     if(this.x <= 0){
       this.x = 0
-    } else if(this.x >= this.canvas.width - 80){
-      this.x = this.canvas.width - 80
+    } else if(this.x >= this.canvas.width){
+      this.x = this.canvas.width
     }
     
     if(this.y <= 0){
@@ -65,9 +65,6 @@ export default class Tank {
 
   move() {
 
-    let element = [1,2,3]
-
-    // console.log()
 
     if(this.shoot){
       if(this.bulletDirection == "down"){
@@ -82,7 +79,6 @@ export default class Tank {
 
       this.shoot = false
       this.limit = true
-
     }
 
     let nextX = this.x
@@ -116,10 +112,10 @@ export default class Tank {
   checkCollision(nextX, nextY){
     for(const block of this.blockList){
       if(
-      nextX < block.x + block.width - 15 &&
-      nextX + this.width > block.x + 15 &&
-      nextY < block.y + block.height - 15 &&
-      nextY + this.height > block.y + 15
+      nextX < block.x + block.width &&
+      nextX + this.width > block.x &&
+      nextY < block.y + block.height &&
+      nextY + this.height > block.y
       ){
         return true
       }

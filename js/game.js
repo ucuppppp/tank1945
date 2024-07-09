@@ -12,8 +12,6 @@ const blockWidth = 80;
 const enemyWidthAndHeight = 100;
 const playerWidthAndHeight = 100;
 
-
-
 const blockList = [
   new Block(
     canvas,
@@ -337,18 +335,53 @@ const blockList = [
   ),
 ];
 
+
+const enemies = [
+  new Enemy(
+    canvas,
+    880,
+    0,
+    "./assets/img/enemyAdjust.png",
+    3,
+    "down",
+    90,
+    blockList
+  ),
+  new Enemy(
+    canvas,
+    875,
+    625,
+    "./assets/img/player1Adjust.png",
+    3,
+    "up",
+    90,
+    blockList
+  ),
+  new Enemy(
+    canvas,
+    -15,
+    625,
+    "./assets/img/enemyAdjust.png",
+    3,
+    "right",
+    90,
+    blockList
+  ),
+];
+
+
+
 const playerbulletController = new BulletController(canvas, 1, "yellow", false);
 const player = new Tank(
   canvas,
   "./assets/img/player1Adjust.png",
   4,
   blockList,
-  playerbulletController
+  playerbulletController,
+  enemies
 );
 
- const enemy1 = new Enemy(canvas, 875, 625, "./assets/img/enemyAdjust.png", 3, "up", 100, blockList);
- const enemy2 = new Enemy(canvas, 880, 0, "./assets/img/enemyAdjust.png", 3, "down", 100 , blockList);
- const enemy3 = new Enemy(canvas, -15, 625, "./assets/img/enemyAdjust.png", 3, "right", 100 , blockList);
+
 
 function game() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -357,17 +390,14 @@ function game() {
     block.draw(ctx);
   });
 
-
   player.draw(ctx);
   playerbulletController.draw(ctx, blockList);
 
-  enemy1.draw(ctx);
-  enemy2.draw(ctx);
-  enemy3.draw(ctx);
-  console.log("enemy1", "x :" + enemy1.x, "y :" + enemy1.y, "isCollided :" + enemy1.hasCollided, "cooldown :" + enemy1.cooldown);
-  console.log("enemy2","x :" + enemy2.x, "y :" + enemy2.y, "isCollided :" + enemy2.hasCollided, "cooldown :" + enemy2.cooldown);
-  console.log("enemy3","x :" + enemy3.x, "y :" + enemy3.y, "isCollided :" + enemy3.hasCollided, "cooldown :" + enemy3.cooldown);
-  
+  enemies.forEach(enemy => {
+    enemy.draw(ctx);
+  })
+
+  enemies = enemies.filter((enemy) => !enemy.destroyed);
 
 }
 

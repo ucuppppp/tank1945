@@ -13,7 +13,7 @@ export default class Enemy {
     this.x = x;
     this.y = y;
     this.width = 70;
-    this.height = 90;
+    this.height = 80;
     this.image = new Image();
     this.image.src = imageSrc;
     this.direction = direction;
@@ -88,11 +88,11 @@ export default class Enemy {
       ) {
         // Setelah tabrakan, kembalikan posisi Enemy ke sebelum tabrakan
         if (this.direction === "up") {
-          this.y = block.y + block.height - 5;
+          this.y = block.y + block.height;
         } else if (this.direction === "down") {
-          this.y = block.y - this.height - 5;
+          this.y = block.y - this.height;
         } else if (this.direction === "left") {
-          this.x = block.x + block.width ;
+          this.x = block.x + block.width;
         } else if (this.direction === "right") {
           this.x = block.x - this.width;
         }
@@ -103,22 +103,22 @@ export default class Enemy {
     });
 
     // Pengecekan tabrakan dengan batas canvas
-    if (this.x <= 5) {
-      this.x = 5;
+    if (this.x <= 0) {
+      this.x = 0;
       this.changeDirection();
       this.hasCollided = true; // Set hasCollided setelah tabrakan
-    } else if (this.x >= this.canvas.width - this.width - 5) {
-      this.x = this.canvas.width - this.width - 5;
+    } else if (this.x >= this.canvas.width - this.width) {
+      this.x = this.canvas.width - this.width;
       this.changeDirection();
       this.hasCollided = true; // Set hasCollided setelah tabrakan
     }
 
-    if (this.y <= -5) {
-      this.y = -5;
+    if (this.y <= 0) {
+      this.y = 0;
       this.changeDirection();
       this.hasCollided = true; // Set hasCollided setelah tabrakan
-    } else if (this.y >= this.canvas.height - this.height + 5) {
-      this.y = this.canvas.height - this.height + 5;
+    } else if (this.y >= this.canvas.height - this.height) {
+      this.y = this.canvas.height - this.height;
       this.changeDirection();
       this.hasCollided = true; // Set hasCollided setelah tabrakan
     }

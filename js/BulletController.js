@@ -13,9 +13,9 @@ export default class BulletController {
     this.shootSound.volume = 0.5;
   }
 
-  draw(ctx, blockList) {
+  draw(ctx, blockList, enemies) {
     this.bullets = this.bullets.filter((bullet) => !bullet.destroyed);
-    this.bullets.forEach((bullet) => bullet.draw(ctx, blockList));
+    this.bullets.forEach((bullet) => bullet.draw(ctx, blockList, enemies));
   }
 
   shoot(x, y, speed, direction, timeTillNextBulletAllowed = 0) {
