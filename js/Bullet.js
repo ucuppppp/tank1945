@@ -11,10 +11,14 @@ export default class Bullet {
     this.destroyed = false; // Menandai apakah peluru telah hancur
   }
 
-  draw(ctx, blockList, enemies) {
+  
+  draw(ctx, blockList, enemies, players) {
     this.move();
-    this.checkCollision(blockList, enemies);
+    // console.log(this.x, this.y, this.direction, !this.destroyed)
+    this.checkCollision(blockList, enemies, players);
+    // console.log(this.destroyed)
     if (!this.destroyed) {
+      // console.log(this.color, this.x, this.y);
       ctx.fillStyle = this.color;
       ctx.fillRect(this.x, this.y, this.width, this.height);
     }
@@ -38,7 +42,7 @@ export default class Bullet {
     this.checkOutOfBounds();
   }
 
-  checkCollision(blockList, enemies) {
+  checkCollision(blockList, enemies, players) {
     for (let i = 0; i < blockList.length; i++) {
       const block = blockList[i];
       if (
@@ -47,8 +51,12 @@ export default class Bullet {
         this.y < block.y + block.height &&
         this.y + this.height > block.y
       ) {
-        blockList.splice(i, 1);
         this.destroyed = true;
+        if(block.health > 1) {
+          block.health--;
+        } else {
+          blockList.splice(i, 1);
+        }
         break;
       }
     }
@@ -62,10 +70,32 @@ export default class Bullet {
         this.y + this.height > enemy.y
       ) {
         enemies.splice(i, 1);
-        this.destroyed = true;
+        if(enemies.length === 0) {
+          const winSound = new Audio("assets/sounds/win.wav");
+        }
+        console.log(enemies)
+        const enemyDestroySound = new Audio("assets/sounds/enemyDestroy.wav");
+        // enemyDestroySound.play();
+        this.destroyed = true; 
+        
         break;
       }
     }
+
+    // for (let i = 0; i < players.length; i++) {
+    //   const player = players[i];
+    //   if (
+    //     this.x < player.x + player.width &&
+    //     this.x + this.width > player.x &&
+    //     this.y < player.y + player.height &&
+    //     this.y + this.height > player.y
+    //   ) {
+    //     player.health--;
+    //     this.destroyed = true;
+    //     break;
+    //   }
+    // }
+
   }
 
   checkOutOfBounds() {
@@ -75,7 +105,10 @@ export default class Bullet {
       this.y < 0 ||
       this.y > this.canvas.height
     ) {
+      const outOfCanvasSound = new Audio("assets/sounds/outOfCanvas.wav");
+      outOfCanvasSound.play();
       this.destroyed = true;
+      
     }
   }
 }

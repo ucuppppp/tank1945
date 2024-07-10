@@ -15,13 +15,13 @@ export default class Tank {
     this.image.src = imageSrc;
     this.x = 0
     this.y = 0
-    this.width = 70;
+    this.width = 70; 
     this.height = 80;
     this.speed = speed;
     this.angle = 180;
     this.blockList = blockList
     this.bulletController = bulletController
-
+// console.log(this.enemies);
     document.addEventListener("keydown", this.keydown.bind(this));
     document.addEventListener("keyup", this.keyup.bind(this));
   }
@@ -33,14 +33,14 @@ export default class Tank {
     // mengecheck koordinat agar objek tidak keluar dari canvas
     if(this.x <= 0){
       this.x = 0
-    } else if(this.x >= this.canvas.width){
-      this.x = this.canvas.width
+    } else if(this.x >= this.canvas.width - this.width){
+      this.x = this.canvas.width - this.width;
     }
     
     if(this.y <= 0){
       this.y = 0
-    } else if(this.y >= this.canvas.height - 80){
-      this.y = this.canvas.height - 80
+    } else if(this.y >= this.canvas.height - this.height){
+      this.y = this.canvas.height - this.height
     }
 
 
@@ -69,7 +69,7 @@ export default class Tank {
     if(this.shoot){
       if(this.bulletDirection == "down"){
         this.bulletController.shoot(this.x + this.width / 2 - 5 , this.y +  this.height - 8, 10, this.bulletDirection, 1)
-      } if(this.bulletDirection == "up"){ 
+      } if(this.bulletDirection == "up"){
         this.bulletController.shoot(this.x + this.width / 2 - 4 , this.y, 10, this.bulletDirection, 1)
       } if(this.bulletDirection == "right"){
         this.bulletController.shoot(this.x + this.width - 8, this.y + this.height / 2 - 4 , 10, this.bulletDirection, 1)

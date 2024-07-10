@@ -19,7 +19,8 @@ const blockList = [
     0,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -27,7 +28,8 @@ const blockList = [
     80,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -35,7 +37,8 @@ const blockList = [
     160,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -43,7 +46,8 @@ const blockList = [
     240,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -51,7 +55,8 @@ const blockList = [
     400,
     blockWidth,
     blockWidth,
-    "./assets/img/solid_brick.jpg"
+    "./assets/img/solid_brick.jpg",
+    6
   ),
   new Block(
     canvas,
@@ -59,7 +64,8 @@ const blockList = [
     480,
     blockWidth,
     blockWidth,
-    "./assets/img/solid_brick.jpg"
+    "./assets/img/solid_brick.jpg",
+    6
   ),
   new Block(
     canvas,
@@ -67,7 +73,8 @@ const blockList = [
     560,
     blockWidth,
     blockWidth,
-    "./assets/img/solid_brick.jpg"
+    "./assets/img/solid_brick.jpg",
+    6
   ),
   new Block(
     canvas,
@@ -75,7 +82,8 @@ const blockList = [
     560,
     blockWidth,
     blockWidth,
-    "./assets/img/solid_brick.jpg"
+    "./assets/img/solid_brick.jpg",
+    6
   ),
   new Block(
     canvas,
@@ -83,7 +91,8 @@ const blockList = [
     560,
     blockWidth,
     blockWidth,
-    "./assets/img/solid_brick.jpg"
+    "./assets/img/solid_brick.jpg",
+    6
   ),
   new Block(
     canvas,
@@ -91,7 +100,8 @@ const blockList = [
     560,
     blockWidth,
     blockWidth,
-    "./assets/img/solid_brick.jpg"
+    "./assets/img/solid_brick.jpg",
+    6
   ),
   new Block(
     canvas,
@@ -99,7 +109,8 @@ const blockList = [
     560,
     blockWidth,
     blockWidth,
-    "./assets/img/solid_brick.jpg"
+    "./assets/img/solid_brick.jpg",
+    6
   ),
   new Block(
     canvas,
@@ -107,7 +118,8 @@ const blockList = [
     560,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -115,7 +127,8 @@ const blockList = [
     560,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -123,7 +136,8 @@ const blockList = [
     560,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -131,7 +145,8 @@ const blockList = [
     560,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -139,7 +154,8 @@ const blockList = [
     480,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -147,7 +163,8 @@ const blockList = [
     400,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -155,7 +172,8 @@ const blockList = [
     320,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -163,7 +181,8 @@ const blockList = [
     240,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -171,7 +190,8 @@ const blockList = [
     80,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -179,7 +199,8 @@ const blockList = [
     80,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -187,7 +208,8 @@ const blockList = [
     80,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -195,7 +217,8 @@ const blockList = [
     80,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -203,7 +226,8 @@ const blockList = [
     80,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -211,7 +235,8 @@ const blockList = [
     80,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -219,7 +244,8 @@ const blockList = [
     80,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -227,7 +253,8 @@ const blockList = [
     160,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -235,7 +262,8 @@ const blockList = [
     240,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -243,7 +271,8 @@ const blockList = [
     320,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -251,7 +280,8 @@ const blockList = [
     400,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -259,7 +289,8 @@ const blockList = [
     400,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -267,7 +298,8 @@ const blockList = [
     400,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -275,7 +307,8 @@ const blockList = [
     400,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -283,7 +316,8 @@ const blockList = [
     400,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -291,7 +325,8 @@ const blockList = [
     400,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -299,7 +334,8 @@ const blockList = [
     320,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -307,7 +343,8 @@ const blockList = [
     240,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -315,7 +352,8 @@ const blockList = [
     240,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -323,7 +361,8 @@ const blockList = [
     240,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
   new Block(
     canvas,
@@ -331,57 +370,79 @@ const blockList = [
     240,
     blockWidth,
     blockWidth,
-    "./assets/img/break_brick.jpg"
+    "./assets/img/break_brick.jpg",
+    3
   ),
 ];
 
-
+const enemybulletController = new BulletController(canvas, 3, "red", false, null);
 const enemies = [
   new Enemy(
     canvas,
     880,
     0,
     "./assets/img/enemyAdjust.png",
-    3,
+    2,
     "down",
     90,
-    blockList
+    90,
+    blockList,
+    enemybulletController
   ),
   new Enemy(
     canvas,
     875,
     625,
     "./assets/img/player1Adjust.png",
-    3,
+    2,
     "up",
     90,
-    blockList
+    90,
+    blockList,
+    enemybulletController
   ),
   new Enemy(
     canvas,
     -15,
     625,
     "./assets/img/enemyAdjust.png",
-    3,
+    2,
     "right",
     90,
-    blockList
+    90,
+    blockList,
+    enemybulletController
   ),
 ];
 
+const imgRender = ["./assets/img/break_brick.jpg", "./assets/img/solid_brick.jpg"];
 
-
-const playerbulletController = new BulletController(canvas, 1, "yellow", false);
+const playerbulletController = new BulletController(
+  canvas,
+  1,
+  "yellow",
+  true,
+  "assets/sounds/shoot.wav"
+);
 const player = new Tank(
   canvas,
   "./assets/img/player1Adjust.png",
-  4,
+  2,
+  blockList,
+  playerbulletController,
+  enemies
+);
+const player2 = new Tank(
+  canvas,
+  "./assets/img/player1Adjust.png",
+  2,
   blockList,
   playerbulletController,
   enemies
 );
 
-
+let win = false
+let lose = false
 
 function game() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -391,14 +452,48 @@ function game() {
   });
 
   player.draw(ctx);
-  playerbulletController.draw(ctx, blockList);
+  playerbulletController.draw(ctx, blockList, enemies, [player]);
 
-  enemies.forEach(enemy => {
+  enemies.forEach((enemy) => {
     enemy.draw(ctx);
-  })
+    enemybulletController.draw(ctx, blockList, [player], enemies);
+  });
 
-  enemies = enemies.filter((enemy) => !enemy.destroyed);
+  // Check win condition
+  if (playerbulletController.gameOver) {
+    win = true;
+    console.log(win);
+  }
 
+  // Check lose condition and handle it
+  if (enemybulletController.gameOver) {
+    lose = true;
+    console.log("lose");
+  }
+
+  // Handle game over scenarios
+  if (win) {
+    console.log("win");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    ctx.font = "80px Arial";
+    ctx.fillText("YOU WIN", 300, 350);
+    return; // Stop the game loop
+  }
+
+  if (lose) {
+    console.log("lose");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    ctx.font = "60px Arial";
+    ctx.fillText("YOU LOSE", 250, 300);
+    return; // Stop the game loop
+  }
 }
 
+// Start the game loop
 setInterval(game, 1000 / 60);

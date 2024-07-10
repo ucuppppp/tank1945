@@ -6,8 +6,10 @@ export default class Enemy {
     imageSrc,
     speed,
     direction,
-    cooldownMax,
-    blockList
+    cooldownMoveMax,
+    cooldownMaxShoot,
+    blockList,
+    bulletController
   ) {
     this.canvas = canvas;
     this.x = x;
@@ -16,17 +18,22 @@ export default class Enemy {
     this.height = 80;
     this.image = new Image();
     this.image.src = imageSrc;
-    this.direction = direction;
+    this.direction = direction; 
+    this.bulletDirection = this.direction;
     this.speed = speed;
     this.hasCollided = false;
-    this.cooldown = 0;
-    this.cooldownMax = cooldownMax;
+    this.cooldownMove = 0;
+    this.cooldownMoveMax = cooldownMoveMax;
     this.blockList = blockList;
+    this.bulletController = bulletController;
+    this.cooldownMaxShoot = cooldownMaxShoot;
+    this.cooldownShoot = cooldownMaxShoot;
   }
 
   draw(ctx) {
     this.move();
-    this.updateCooldown();
+    this.updateCooldownMove();
+    this.updateCooldownShoot();
 
     ctx.save();
 
@@ -47,24 +54,72 @@ export default class Enemy {
   }
 
   move() {
+
+    // console.log(this.cooldownShoot);
+
+    if (this.cooldownShoot === 0) {
+      if (this.bulletDirection === "down") {
+        this.bulletController.shoot(
+          this.x + this.width / 2 - 5,
+          this.y + this.height - 8,
+          2,
+          this.bulletDirection,
+          1
+        );
+      }
+      if (this.bulletDirection === "up") {
+        this.bulletController.shoot(
+          this.x + this.width / 2 - 4,
+          this.y,
+          2,
+          this.bulletDirection,
+          1
+        );
+      }
+      if (this.bulletDirection === "right") {
+        this.bulletController.shoot(
+          this.x + this.width - 8,
+          this.y + this.height / 2 - 4,
+          2,
+          this.bulletDirection,
+          1
+        );
+      }
+      if (this.bulletDirection === "left") {
+        this.bulletController.shoot(
+          this.x - 3,
+          this.y + this.height / 2 - 6,
+          2,
+          this.bulletDirection,
+          1
+        );
+      }
+
+      this.cooldownShoot = this.cooldownMaxShoot;
+    }
+
     if (this.direction === "up") {
       this.angle = 0; // Sudut rotasi ke atas
+      this.bulletDirection = "up";
       this.y -= this.speed;
     } else if (this.direction === "down") {
       this.angle = 180; // Sudut rotasi ke bawah
+      this.bulletDirection = "down";
       this.y += this.speed;
     } else if (this.direction === "left") {
       this.angle = -90; // Sudut rotasi ke kiri
+      this.bulletDirection = "left";
       this.x -= this.speed;
     } else if (this.direction === "right") {
       this.angle = 90; // Sudut rotasi ke kanan
+      this.bulletDirection = "right";
       this.x += this.speed;
-    }
+     }
     this.checkCollision();
   }
 
   changeDirection() {
-    if (this.cooldown === 0) {
+    if (this.cooldownMove === 0) {
       const randomDirections = ["up", "down", "left", "right"];
       let newDirection = this.direction;
       while (newDirection === this.direction) {
@@ -73,7 +128,7 @@ export default class Enemy {
       }
       this.direction = newDirection;
       this.hasCollided = false; // Reset hasCollided setelah mengganti arah
-      this.cooldown = this.cooldownMax;
+      this.cooldownMove = this.cooldownMoveMax;
     }
   }
 
@@ -124,9 +179,19 @@ export default class Enemy {
     }
   }
 
-  updateCooldown() {
-    if (this.cooldown > 0) {
-      this.cooldown--;
+
+
+
+  updateCooldownMove() {
+    if (this.cooldownMove > 0) {
+      this.cooldownMove--;
+      // console.log(this.cooldownMove);
+    }
+  }
+  updateCooldownShoot() {
+    if (this.cooldownShoot > 0) {
+      this.cooldownShoot--;
+      // console.log(this.cooldownShoot);
     }
   }
 }
