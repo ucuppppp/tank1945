@@ -1,5 +1,12 @@
+@font-face {
+  font-family: "Retro Gaming";
+  src: url("../assets/fonts/RetroGaming.ttf");
+}
+
+
+
 * {
-  font-family: "Press Start 2p";
+  /* font-family: "Press Start 2p"; */
   text-align: center;
   box-sizing: border-box;
   margin: 0;
@@ -8,6 +15,7 @@
 
 body {
   background-color: rgb(32, 32, 32);
+  font-family: "Retro Gaming", Arial, sans-serif;
 }
 
 h1 {

@@ -11,14 +11,11 @@ export default class Bullet {
     this.destroyed = false; // Menandai apakah peluru telah hancur
   }
 
-  
   draw(ctx, blockList, enemies, players) {
     this.move();
-    // console.log(this.x, this.y, this.direction, !this.destroyed)
     this.checkCollision(blockList, enemies, players);
-    // console.log(this.destroyed)
+
     if (!this.destroyed) {
-      // console.log(this.color, this.x, this.y);
       ctx.fillStyle = this.color;
       ctx.fillRect(this.x, this.y, this.width, this.height);
     }
@@ -43,6 +40,7 @@ export default class Bullet {
   }
 
   checkCollision(blockList, enemies, players) {
+    // Check collision with blocks
     for (let i = 0; i < blockList.length; i++) {
       const block = blockList[i];
       if (
@@ -52,7 +50,7 @@ export default class Bullet {
         this.y + this.height > block.y
       ) {
         this.destroyed = true;
-        if(block.health > 1) {
+        if (block.health > 1) {
           block.health--;
         } else {
           blockList.splice(i, 1);
@@ -61,6 +59,7 @@ export default class Bullet {
       }
     }
 
+    // Check collision with enemies
     for (let i = 0; i < enemies.length; i++) {
       const enemy = enemies[i];
       if (
@@ -69,33 +68,27 @@ export default class Bullet {
         this.y < enemy.y + enemy.height &&
         this.y + this.height > enemy.y
       ) {
-        enemies.splice(i, 1);
-        if(enemies.length === 0) {
-          const winSound = new Audio("assets/sounds/win.wav");
+        const health = enemy.health;
+        if (health > 0) {
+          for (let j = 0; j < players.length; j++) {
+            const damage = players[j].damage;
+            enemy.health = health - damage// Reduksi health enemy hanya 1 kali per collision
+            console.log(players);
+          }
+          console.log(enemy.health);
         }
-        console.log(enemies)
-        const enemyDestroySound = new Audio("assets/sounds/enemyDestroy.wav");
-        // enemyDestroySound.play();
-        this.destroyed = true; 
-        
+        if (health <= 1) {
+          enemies.splice(i, 1);
+          const enemyDestroySound = new Audio("assets/sounds/enemyDestroy.wav");
+          enemyDestroySound.play();
+        }
+        this.destroyed = true;
         break;
       }
     }
 
-    // for (let i = 0; i < players.length; i++) {
-    //   const player = players[i];
-    //   if (
-    //     this.x < player.x + player.width &&
-    //     this.x + this.width > player.x &&
-    //     this.y < player.y + player.height &&
-    //     this.y + this.height > player.y
-    //   ) {
-    //     player.health--;
-    //     this.destroyed = true;
-    //     break;
-    //   }
-    // }
-
+    // Check if bullet is out of bounds
+    this.checkOutOfBounds();
   }
 
   checkOutOfBounds() {
@@ -108,7 +101,6 @@ export default class Bullet {
       const outOfCanvasSound = new Audio("assets/sounds/outOfCanvas.wav");
       outOfCanvasSound.play();
       this.destroyed = true;
-      
     }
   }
 }

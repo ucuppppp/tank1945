@@ -8,6 +8,9 @@ export default class Tank {
   bulletDirection = "down"
   limit = false
   bulletLimit = 10
+  damage = 1
+  health = 3
+  isDestroyed = false
 
   constructor(canvas, imageSrc, speed, blockList,bulletController) {
     this.canvas = canvas;
@@ -108,6 +111,9 @@ export default class Tank {
     }
 
   }
+
+
+
 
   checkCollision(nextX, nextY){
     for(const block of this.blockList){

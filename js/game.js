@@ -8,11 +8,11 @@ const ctx = canvas.getContext("2d");
 
 canvas.width = 960;
 canvas.height = 720;
+const x = canvas.width / 2;
+const y = canvas.height / 2;
 const blockWidth = 80;
-const enemyWidthAndHeight = 100;
-const playerWidthAndHeight = 100;
 
-const blockList = [
+let blockList = [
   new Block(
     canvas,
     80,
@@ -375,8 +375,15 @@ const blockList = [
   ),
 ];
 
-const enemybulletController = new BulletController(canvas, 3, "red", false, null);
-const enemies = [
+const enemybulletController = new BulletController(
+  canvas,
+  3,
+  "red",
+  false,
+  null
+);
+
+let enemies = [
   new Enemy(
     canvas,
     880,
@@ -415,8 +422,6 @@ const enemies = [
   ),
 ];
 
-const imgRender = ["./assets/img/break_brick.jpg", "./assets/img/solid_brick.jpg"];
-
 const playerbulletController = new BulletController(
   canvas,
   1,
@@ -424,25 +429,21 @@ const playerbulletController = new BulletController(
   true,
   "assets/sounds/shoot.wav"
 );
-const player = new Tank(
+
+let player = new Tank(
   canvas,
   "./assets/img/player1Adjust.png",
-  2,
-  blockList,
-  playerbulletController,
-  enemies
-);
-const player2 = new Tank(
-  canvas,
-  "./assets/img/player1Adjust.png",
-  2,
+  5,
   blockList,
   playerbulletController,
   enemies
 );
 
-let win = false
-let lose = false
+let win = false;
+let lose = false;
+let gameInterval;
+const bgSound = new Audio("assets/sounds/backsound.wav");
+
 
 function game() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -462,38 +463,61 @@ function game() {
   // Check win condition
   if (playerbulletController.gameOver) {
     win = true;
-    console.log(win);
   }
 
-  // Check lose condition and handle it
-  if (enemybulletController.gameOver) {
+  // Check lose condition
+  if (player.health <= 0) {
     lose = true;
-    console.log("lose");
   }
+
+ 
 
   // Handle game over scenarios
-  if (win) {
-    console.log("win");
+  if (win || lose) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "white";
-    ctx.font = "80px Arial";
-    ctx.fillText("YOU WIN", 300, 350);
-    return; // Stop the game loop
-  }
+    ctx.textAlign = "center";
+    ctx.font = "bold 5em Retro Gaming";
+    ctx.fillText(win ? "YOU WIN" : "YOU LOSE", x, y);
+    if (win) {
+      // let winSound = new Audio("assets/sounds/gameOver.mp3");
+      // winSound.play();
+    } else if (lose) {
+      let loseSound = new Audio("assets/sounds/gameOver.mp3");
+      loseSound.play();
+    }
 
-  if (lose) {
-    console.log("lose");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "white";
-    ctx.font = "60px Arial";
-    ctx.fillText("YOU LOSE", 250, 300);
-    return; // Stop the game loop
+
+
+    // Stop the game loop
+    bgSound.pause();
+    clearInterval(gameInterval);
+    // alert("Game stopped"); // Log to confirm game loop has stopped
   }
 }
 
-// Start the game loop
-setInterval(game, 1000 / 60);
+// Function to show intro screen
+function showIntro() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "white";
+  ctx.font = "bold 3em Retro Gaming";
+  ctx.textAlign = "center";
+  ctx.fillText("STAGE 1", canvas.width / 2, canvas.height / 2);
+  const introSound = new Audio("assets/sounds/stageStart.mp3");
+  introSound.play();
+  setTimeout(() => {
+    bgSound.loop = true;
+    bgSound.play();
+    bgSound.volume = 0.5;
+  } , 4500);
+  setTimeout(() => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    gameInterval = setInterval(game, 1000 / 60);
+  }, 3000); // Display intro screen for 3 seconds before starting the game
+}
+
+// Call the function to display intro screen and start the game
+showIntro();

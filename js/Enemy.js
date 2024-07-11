@@ -28,6 +28,8 @@ export default class Enemy {
     this.bulletController = bulletController;
     this.cooldownMaxShoot = cooldownMaxShoot;
     this.cooldownShoot = cooldownMaxShoot;
+    this.damage = 1;
+    this.health = 1;
   }
 
   draw(ctx) {
@@ -62,7 +64,7 @@ export default class Enemy {
         this.bulletController.shoot(
           this.x + this.width / 2 - 5,
           this.y + this.height - 8,
-          2,
+          3,
           this.bulletDirection,
           1
         );
@@ -71,7 +73,7 @@ export default class Enemy {
         this.bulletController.shoot(
           this.x + this.width / 2 - 4,
           this.y,
-          2,
+          3,
           this.bulletDirection,
           1
         );
@@ -89,7 +91,7 @@ export default class Enemy {
         this.bulletController.shoot(
           this.x - 3,
           this.y + this.height / 2 - 6,
-          2,
+          3,
           this.bulletDirection,
           1
         );
